@@ -113,7 +113,7 @@ while run:
     
     redrawGameWindow() 
 
-        
+        if x>=(130, 705):
 
     
     

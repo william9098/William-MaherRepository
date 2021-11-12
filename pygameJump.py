@@ -4,7 +4,15 @@ from pygame import event
 from pygame.constants import K_SPACE
 WIDTH=800
 HEIGHT=800
+left = False
+right = False
+walkCount = 0
 
+
+# walkRight = [py.image.load('R1.png'), py.image.load('R2.png'), py.image.load('R3.png'), py.image.load('R4.png'), py.image.load('R5.png'), py.image.load('R6.png'), py.image.load('R7.png'), py.image.load('R8.png'), py.image.load('R9.png')]
+# walkLeft = [py.image.load('L1.png'), py.image.load('L2.png'), py.image.load('L3.png'), py.image.load('L4.png'), py.image.load('L5.png'), py.image.load('L6.png'), py.image.load('L7.png'), py.image.load('L8.png'), py.image.load('L9.png')]
+# bg = py.image.load('bg.jpg')
+# char = py.image.load('standing.png')
 
 boulder=py.Rect(WIDTH-300, HEIGHT-200, 100, 200)
 
@@ -46,7 +54,7 @@ run=True #Variable to control the main loop
 move=True
 Jumping=False
 jumpCount=10
-while run:
+
 
     py.time.delay(100) #milliseconds
     for anyThing in py.event.get():
@@ -99,3 +107,4 @@ py.quit()
 
 #for pictures, 64 x 64, get find a picture with no background
 #500-525, 600
+
