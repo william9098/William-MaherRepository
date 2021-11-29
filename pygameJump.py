@@ -56,10 +56,10 @@ Jumping=False
 jumpCount=10
 
 
-    py.time.delay(100) #milliseconds
-    for anyThing in py.event.get():
-        if anyThing.type == py.QUIT:
-            run =False
+py.time.delay(100) #milliseconds
+for anyThing in py.event.get():
+    if anyThing.type == py.QUIT:
+        run =False
     keyPressed= py.key.get_pressed()
     # if square.y <HEIGHT-200-hbox:
     if keyPressed[py.K_RIGHT] and square.x <WIDTH-wbox-speed and move:
@@ -102,7 +102,8 @@ jumpCount=10
     py.draw.rect(screen, objColor, square)
     py.draw.rect(screen, boulderColor, boulder)
     py.display.flip()
-py.quit()
+
+    py.quit()
 
 
 #for pictures, 64 x 64, get find a picture with no background
