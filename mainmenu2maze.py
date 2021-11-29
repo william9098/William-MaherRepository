@@ -1,8 +1,6 @@
-#William Maher
-#10/25/21 Learning Fonts and Blit
-
 import pygame as py, os, random, time
 
+#Using Code from mainmenu code, andrew helped me
 DISPLAY_MAIN_MENU=0
 DISPLAY_INSTRUCTIONS=1
 DISPLAY_LEVEL1=2
@@ -24,9 +22,10 @@ RED= (150, 0, 0)
 BLUE=(0, 0,255)
 GREEN=(0,128,0)
 MenuMessages=["Instructions", "Level 1", "Level 2", "Settings", "Scoreboard", "Exit"]
-settingsmessages=["Background Color", "Screen Size"]
+settingsmessages=["Background Color","Screen Size"]
 bkgcolors=["Black", "Blue", "Green"]
-scrnsizemessages=["300 x 300", "500 x 500", "800 x 800"]
+scrnsizemessages=["900 x 900", "1400 x 900", "800 x 800"]
+InstructionsMessages=["Collect all the Stars", "Finish the maze", "Use arrow keys to move", "There is no jumping", "You can move up and down with arrows"]
 WIDTH=800
 HEIGHT=800
 window=py.display.set_mode((WIDTH,HEIGHT))
@@ -34,6 +33,7 @@ py.display.set_caption("Setting Window")
 
 #TITLE_FONT=pygame.font.SysFont(name, size, bold=False, italic=False)
 TITLE_FONT=py.font.SysFont('comicsans', 80)
+INSTRUCTIONS_FONT=py.font.SysFont('comicsans', 40)
 SubTitle=py.font.SysFont('comicsans', 40, italic=True)
 text=TITLE_FONT.render("message", 1, WHITE)
 wbox=25
@@ -68,22 +68,41 @@ def display_Menu(messages):
         y+=80
         square.y=y
 
-def Screen_Size():
+def display_Instructions(messages):
     x=70
     y=190
     square.x=x
     square.y=y
-    for i in range(0, len(scrnsizemessages)):
-        word=scrnsizemessages[i]
-        py.draw.rect(window, RED, square)
-        text=TITLE_FONT.render(word, 1, WHITE)
+    for i in range(0, len(messages)):
+        word=messages[i]
+        text=INSTRUCTIONS_FONT.render(word, 1, WHITE)
         window.blit(text, (x+wbox+10,y))
         py.display.flip()
         py.time.delay(100)
         y+=80
         square.y=y
-    
 
+# def Screen_Size():
+#     x=70
+#     y=190
+#     square.x=x
+#     square.y=y
+#     for i in range(0, len(scrnsizemessages)):
+#         word=scrnsizemessages[i]
+#         py.draw.rect(window, RED, square)
+#         text=TITLE_FONT.render(word, 1, WHITE)
+#         window.blit(text, (x+wbox+10,y))
+#         py.display.flip()
+#         py.time.delay(100)
+#         y+=80
+#         square.y=y
+    
+def display_level1():
+    bg = py.image.load('gameimages/grassbkgimage2.jpg')
+    window.blit(bg, (0,0))
+    py.display.set_caption("Grassy Level Maze")
+    levelBackRect=display_Title("Quit", 750)
+    py.display.flip()
 
 
 bkgcolor=BLACK
@@ -111,19 +130,20 @@ while run:
             #MAIN MENU CODE:
             if currentDisplay==DISPLAY_MAIN_MENU:
                 mouse_pos=py.mouse.get_pos()
-                if mouse_pos[0]>=70 and mouse_pos[0]<=95 and mouse_pos[1]>=200 and mouse_pos[1]<=225:
+                if mouse_pos[0]>=70 and mouse_pos[0]<=95 and mouse_pos[1]>=190 and mouse_pos[1]<=225:
                     window.fill(bkgcolor)
                     display_Title("Instructions", 70)
                     display_Title("Back", 750)
+                    display_Instructions(InstructionsMessages)
                     py.display.update()
                     currentDisplay=DISPLAY_INSTRUCTIONS
-                
-                if mouse_pos[0]>=70 and mouse_pos[0]<=95 and mouse_pos[1]>=250 and mouse_pos[1]<=275: #71, 193. 93,193. 93, 212. 71, 211
-                    window.fill(bkgcolor)
-                    display_Title("Level 1",  70)
-                    display_Title("Back", 750)
+                   
+                if mouse_pos[0]>=70 and mouse_pos[0]<=95 and mouse_pos[1]>=270 and mouse_pos[1]<=300: #71, 193. 93,193. 93, 212. 71, 211
+                    window.fill(BLACK)
                     py.display.update()
                     currentDisplay=DISPLAY_LEVEL1
+                    display_level1()
+                    #play game here
 
                 if mouse_pos[0]>=70 and mouse_pos[0]<=95 and mouse_pos[1]>=345 and mouse_pos[1]<=375: #71, 193. 93,193. 93, 212. 71, 211
                     window.fill(bkgcolor)
@@ -202,10 +222,11 @@ while run:
 
             elif currentDisplay==DISPLAY_SETTINGS and mouse_pos[0]>=70 and mouse_pos[0]<=95 and mouse_pos[1]>=270 and mouse_pos[1]<=300:
                 window.fill(bkgcolor)
-                display_Title("Object Color", 70)
+                display_Title("Screen Size", 70)
+                display_Menu(scrnsizemessages)
                 display_Title("Back", 750)
                 py.display.update()
-                currentDisplay=DISPLAY_SETTINGS_OBJECT_COLOR
+                currentDisplay=DISPLAY_SETTINGS_SCREEN_SIZE
             
             elif currentDisplay==DISPLAY_SETTINGS and mouse_pos[0]>=70 and mouse_pos[0]<=95 and mouse_pos[1]>=340 and mouse_pos[1]<=370:
                 window.fill(bkgcolor)
@@ -214,13 +235,13 @@ while run:
                 py.display.update()
                 currentDisplay=DISPLAY_SETTINGS_SOUND
             
-            elif currentDisplay==DISPLAY_SETTINGS and mouse_pos[0]>=70 and mouse_pos[0]<=95 and mouse_pos[1]>=430 and mouse_pos[1]<=460:
-                window.fill(bkgcolor)
-                display_Title("Screen Size", 70)
-                display_Menu(scrnsizemessages)
-                display_Title("Back", 750)
-                py.display.update()
-                currentDisplay=DISPLAY_SETTINGS_SCREEN_SIZE
+            # elif currentDisplay==DISPLAY_SETTINGS and mouse_pos[0]>=70 and mouse_pos[0]<=95 and mouse_pos[1]>=430 and mouse_pos[1]<=460:
+            #     window.fill(bkgcolor)
+            #     display_Title("Screen Size", 70)
+            #     display_Menu(scrnsizemessages)
+            #     display_Title("Back", 750)
+            #     py.display.update()
+            #     currentDisplay=DISPLAY_SETTINGS_SCREEN_SIZE
 
             # Back Button Code for Settings:
             elif currentDisplay==DISPLAY_SETTINGS_BACKGROUND_COLOR and mouse_pos[0] >= 355 and mouse_pos[0] <= 465 and mouse_pos[1]>=750 and mouse_pos[1]<=795:
@@ -270,9 +291,7 @@ while run:
                 display_Title("Background Color", 70)
                 display_Menu(bkgcolors)
                 display_Title("Back", 750)
-                py.display.update()
-
-                
+                py.display.update()  
 
             elif currentDisplay==DISPLAY_SETTINGS_BACKGROUND_COLOR and mouse_pos[0]>=70 and mouse_pos[0]<=95 and mouse_pos[1]>=250 and mouse_pos[1]<=280:
                 bkgcolor=BLUE
@@ -289,7 +308,8 @@ while run:
                 display_Menu(bkgcolors)
                 display_Title("Back", 750)
                 py.display.update()
-           
+
+    #SCREEN SIZE ADD       
             elif currentDisplay==DISPLAY_SETTINGS_SCREEN_SIZE and mouse_pos[0]>=70 and mouse_pos[0]<=95 and mouse_pos[1]>=200 and mouse_pos[1]<=225:
                 window=py.display.set_mode((900,900))
                 window.fill(bkgcolor)
@@ -298,8 +318,8 @@ while run:
                 display_Title("Back", 750)
                 py.display.update()  
 
-            elif currentDisplay==DISPLAY_SETTINGS_SCREEN_SIZE and mouse_pos[0]>=70 and mouse_pos[0]<=95 and mouse_pos[1]>=250 and mouse_pos[1]<=280:
-                window=py.display.set_mode((500,500))
+            elif currentDisplay==DISPLAY_SETTINGS_SCREEN_SIZE and mouse_pos[0]>=70 and mouse_pos[0]<=95 and mouse_pos[1]>=250 and mouse_pos[1]<=300:
+                window=py.display.set_mode((1400,900))
                 window.fill(bkgcolor)
                 display_Title("Screen Size", 70)
                 display_Menu(scrnsizemessages)
@@ -313,10 +333,4 @@ while run:
                 display_Menu(scrnsizemessages)
                 display_Title("Back", 750)
                 py.display.update()    
-
-            
-            
-        
-                
 py.quit()
-     

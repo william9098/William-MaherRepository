@@ -1,29 +1,29 @@
-import time
+from os import walk
 import pygame
-
-from pygameJump import Jumping
+from pygame.constants import FINGERDOWN
 pygame.init()
 
 win = pygame.display.set_mode((800,800))
+winRect=win.get_rect()
 pygame.display.set_caption("First Game")
 
-# walkRight = [pygame.image.load(pygame.path.join('Game','R1.png')), pygame.image.load(pygame.path.join('Game','R2.png')), pygame.image.load((pygame.path.join('Game','R3.png')), pygame.image.load((pygame.path.join('Game','R4.png')), pygame.image.load((pygame.path.join('Game','R5.png')), pygame.image.load((pygame.path.join('Game','R6.png')), pygame.image.load((pygame.path.join('Game','R7.png')), pygame.image.load((pygame.path.join('Game','R8.png')), pygame.image.load((pygame.path.join('Game','R9.png'))
-# walkLeft = [pygame.image.load(pygame.path.join('Game','L1.png')), pygame.image.load(pygame.path.join('Game','L2.png')), pygame.image.load(pygame.path.join('Game','L3.png')), pygame.image.load(pygame.path.join('Game','L4.png')), pygame.image.load(pygame.path.join('Game','L5.png')), pygame.image.load(pygame.path.join('Game','L6.png')), pygame.image.load(pygame.path.join('Game','L7.png')), pygame.image.load(pygame.path.join('Game','L8.png')), pygame.image.load(pygame.path.join('Game','L9.png'))
-# bg = pygame.image.load('bg.jpg')
-# char = pygame.image.load('standing.png')
-
+Rock1= pygame.Rect(136, 688, 167-136, winRect.height-688)
+# Rock2= pygame.draw.rect(, Rect, width=0)
+# Rock3=
+# Rock4=
 walkRight = [pygame.image.load('Game/R1.png'), pygame.image.load('Game/R2.png'), pygame.image.load('Game/R3.png'), pygame.image.load('Game/R4.png'), pygame.image.load('Game/R5.png'), pygame.image.load('Game/R6.png'), pygame.image.load('Game/R7.png'), pygame.image.load('Game/R8.png'), pygame.image.load('Game/R9.png')]
 walkLeft = [pygame.image.load('Game/L1.png'), pygame.image.load('Game/L2.png'), pygame.image.load('Game/L3.png'), pygame.image.load('Game/L4.png'), pygame.image.load('Game/L5.png'), pygame.image.load('Game/L6.png'), pygame.image.load('Game/L7.png'), pygame.image.load('Game/L8.png'), pygame.image.load('Game/L9.png')]
-bg = pygame.image.load('gameimages/bgSmaller.jpg')
+bg = pygame.image.load('gameimages/grassbkgimage4.png')
 char = pygame.image.load('Game/standing.png')
 
-#if x >137, then can keep going right. Only way to move is jump. Jump. need to check if x, and y reach these x,y levels
 
 x = 0
 y = 650
 width = 40
 height = 60
 vel = 5
+
+move=True
 
 clock = pygame.time.Clock()
 
@@ -43,7 +43,7 @@ def redrawGameWindow():
         
     if left:  
         win.blit(walkLeft[walkCount//3], (x,y))
-        walkCount += 1
+        walkCount += 1                          
     elif right:
         win.blit(walkRight[walkCount//3], (x,y))
         walkCount += 1
@@ -56,21 +56,23 @@ def redrawGameWindow():
 
 
 run = True
+
 while run:
     clock.tick(27)
     for eve in pygame.event.get():
-        if eve.type == pygame.QUIT: #pygame.QUIT is looking for a key pressed, while pygame.quit() is a function
+        if eve.type == pygame.QUIT: #
             run=False
-        #mouse_pos=(0,0)
 
         elif eve.type==pygame.MOUSEBUTTONDOWN:
             mouse_pressed=pygame.mouse.get_pressed()
             if mouse_pressed[0]:
                 mouse_pos=pygame.mouse.get_pos()
                 print(pygame.mouse.get_pos())
+
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             run = False
+
     keys = pygame.key.get_pressed()
     
     if keys[pygame.K_LEFT] and x > vel: 
@@ -78,18 +80,41 @@ while run:
         left = True
         right = False
 
-    elif keys[pygame.K_RIGHT] and x < 800 - vel - width:  
+    if keys[pygame.K_RIGHT] and x < 105:  
         x += vel
         left = False
         right = True
     
-   
-
+    elif keys[pygame.K_RIGHT] and isJump==True:
+        x += vel
+        left = False
+        right = True
+    
+    elif keys[pygame.K_RIGHT] and pygame.winRect.colliderect(Rock1):
+    # isJump==True and x>137 and x<167 and y< 688:
+        x += vel
+        left = False
+        right = True
+        
+    
+    
     else: 
         left = False
         right = False
         walkCount = 0
+
+    
         
+         #136, 687 AND 166, 671
+        # if keys[pygame.K_RIGHT] and x<105 and y<690:
+        #     x += vel
+        #     left = False
+        #     right = True
+        # x>136 and x<166 and
+    
+
+    
+    
     if not(isJump):
         if keys[pygame.K_SPACE]:
             isJump = True
@@ -103,24 +128,17 @@ while run:
         else: 
             jumpCount = 10
             isJump = False
+   
+    
+        
 
-    if keys[pygame.K_RIGHT] and x<130 and y<705 - vel- width:
-        x += vel
-        left = False
-        right = True
-    
-    
+   
+
     redrawGameWindow() 
 
-        # if x>=(130, 705):
+
 
     
-    
 pygame.quit()
-# (137, 684)
-# (137, 690)
-# (137, 690)
-# (132, 703)
-# (132, 703)
-# (132, 703)
-# (132, 703)
+
+#130, 690-705
