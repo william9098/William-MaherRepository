@@ -24,12 +24,12 @@ GREEN=(0,128,0)
 MenuMessages=["Instructions", "Level 1", "Level 2", "Settings", "Scoreboard", "Exit"]
 settingsmessages=["Background Color","Screen Size"]
 bkgcolors=["Black", "Blue", "Green"]
-scrnsizemessages=["900 x 900", "1400 x 900", "800 x 800"]
+scrnsizemessages=["900 x 900", "1400 x 1400", "800 x 800"]
 InstructionsMessages=["Collect all the Stars", "Finish the maze", "Use arrow keys to move", "There is no jumping", "You can move up and down with arrows"]
 WIDTH=800
 HEIGHT=800
 window=py.display.set_mode((WIDTH,HEIGHT))
-py.display.set_caption("Setting Window")
+py.display.set_caption("Main Menu Window")
 
 #TITLE_FONT=pygame.font.SysFont(name, size, bold=False, italic=False)
 TITLE_FONT=py.font.SysFont('comicsans', 80)
@@ -104,6 +104,13 @@ def display_level1():
     levelBackRect=display_Title("Quit", 750)
     py.display.flip()
 
+def display_level2():
+    bg = py.image.load('gameimages/stonebkgimage2.png')
+    window.blit(bg, (0,0))
+    py.display.set_caption("Stone Maze")
+    levelBackRect=display_Title("Quit", 750)
+    py.display.flip()
+
 
 bkgcolor=BLACK
 window.fill(bkgcolor)
@@ -132,6 +139,7 @@ while run:
                 mouse_pos=py.mouse.get_pos()
                 if mouse_pos[0]>=70 and mouse_pos[0]<=95 and mouse_pos[1]>=190 and mouse_pos[1]<=225:
                     window.fill(bkgcolor)
+                    py.display.set_caption("Instructions Window")
                     display_Title("Instructions", 70)
                     display_Title("Back", 750)
                     display_Instructions(InstructionsMessages)
@@ -139,7 +147,7 @@ while run:
                     currentDisplay=DISPLAY_INSTRUCTIONS
                    
                 if mouse_pos[0]>=70 and mouse_pos[0]<=95 and mouse_pos[1]>=270 and mouse_pos[1]<=300: #71, 193. 93,193. 93, 212. 71, 211
-                    window.fill(BLACK)
+                    window.fill(bkgcolor)
                     py.display.update()
                     currentDisplay=DISPLAY_LEVEL1
                     display_level1()
@@ -147,13 +155,13 @@ while run:
 
                 if mouse_pos[0]>=70 and mouse_pos[0]<=95 and mouse_pos[1]>=345 and mouse_pos[1]<=375: #71, 193. 93,193. 93, 212. 71, 211
                     window.fill(bkgcolor)
-                    display_Title("Level 2", 70)
-                    display_Title("Back", 750)
                     py.display.update()
                     currentDisplay=DISPLAY_LEVEL2
+                    display_level2()
 
                 if mouse_pos[0] >= 70 and mouse_pos[0] <= 95 and mouse_pos[1]>=400 and mouse_pos[1]<=455:  #75, 435 (top left) 95, 435, (top right) bottom right: 95, 455,  bottom left: 75,
                     window.fill(bkgcolor)
+                    py.display.set_caption("Settings Window")
                     display_Title("Settings", 70)
                     display_Title("Back", 750)
                     display_Menu(settingsmessages)
@@ -162,6 +170,7 @@ while run:
 
                 if mouse_pos[0] >= 70 and mouse_pos[0] <= 95 and mouse_pos[1]>=505 and mouse_pos[1]<=535:  #75, 435 (top left) 95, 435, (top right) bottom right: 95, 455,  bottom left: 75,
                     window.fill(bkgcolor)
+                    py.display.set_caption("Scoreboard Window")
                     display_Title("Scoreboard", 70)
                     display_Title("Back", 750)
                     py.display.update()
@@ -177,6 +186,7 @@ while run:
             #BACK BUTTON CODE for Main MEnu:
             elif currentDisplay==DISPLAY_SETTINGS and mouse_pos[0] >= 355 and mouse_pos[0] <= 465 and mouse_pos[1]>=750 and mouse_pos[1]<=795:
                 window.fill(bkgcolor)
+                py.display.set_caption("Main Menu Window")
                 display_Title("Main Menu", 70)
                 display_Menu(MenuMessages)
                 py.display.update()
@@ -184,6 +194,7 @@ while run:
 
             elif currentDisplay==DISPLAY_INSTRUCTIONS and mouse_pos[0] >= 355 and mouse_pos[0] <= 465 and mouse_pos[1]>=750 and mouse_pos[1]<=795:
                 window.fill(bkgcolor)
+                py.display.set_caption("Main Menu Window")
                 display_Title("Main Menu", 70)
                 display_Menu(MenuMessages)
                 py.display.update()
@@ -191,6 +202,7 @@ while run:
 
             elif currentDisplay==DISPLAY_LEVEL1 and mouse_pos[0] >= 355 and mouse_pos[0] <= 465 and mouse_pos[1]>=750 and mouse_pos[1]<=795:
                 window.fill(bkgcolor)
+                py.display.set_caption("Main Menu Window")
                 display_Title("Main Menu", 70)
                 display_Menu(MenuMessages)
                 py.display.update()
@@ -198,6 +210,7 @@ while run:
 
             elif currentDisplay==DISPLAY_LEVEL2 and mouse_pos[0] >= 355 and mouse_pos[0] <= 465 and mouse_pos[1]>=750 and mouse_pos[1]<=795:
                 window.fill(bkgcolor)
+                py.display.set_caption("Main Menu Window")
                 display_Title("Main Menu", 70)
                 display_Menu(MenuMessages)
                 py.display.update()
@@ -205,6 +218,7 @@ while run:
 
             elif currentDisplay==DISPLAY_SCOREBOARD and mouse_pos[0] >= 355 and mouse_pos[0] <= 465 and mouse_pos[1]>=750 and mouse_pos[1]<=795:
                 window.fill(bkgcolor)
+                py.display.set_caption("Main Menu Window")
                 display_Title("Main Menu", 70)
                 display_Menu(MenuMessages)
                 py.display.update()
@@ -309,7 +323,7 @@ while run:
                 display_Title("Back", 750)
                 py.display.update()
 
-    #SCREEN SIZE ADD       
+          
             elif currentDisplay==DISPLAY_SETTINGS_SCREEN_SIZE and mouse_pos[0]>=70 and mouse_pos[0]<=95 and mouse_pos[1]>=200 and mouse_pos[1]<=225:
                 window=py.display.set_mode((900,900))
                 window.fill(bkgcolor)
@@ -319,7 +333,7 @@ while run:
                 py.display.update()  
 
             elif currentDisplay==DISPLAY_SETTINGS_SCREEN_SIZE and mouse_pos[0]>=70 and mouse_pos[0]<=95 and mouse_pos[1]>=250 and mouse_pos[1]<=300:
-                window=py.display.set_mode((1400,900))
+                window=py.display.set_mode((1400,1400))
                 window.fill(bkgcolor)
                 display_Title("Screen Size", 70)
                 display_Menu(scrnsizemessages)
