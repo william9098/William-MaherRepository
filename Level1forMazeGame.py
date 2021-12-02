@@ -87,7 +87,7 @@ while run:
         right = True
     
     if keys[pygame.K_DOWN] and y >vel:
-            y += vel
+        y += vel
     if keys[pygame.K_UP] and y>vel:
         y-=5
     
