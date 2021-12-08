@@ -13,6 +13,36 @@ DISPLAY_SETTINGS_SCREEN_SIZE=9
 currentDisplay=DISPLAY_MAIN_MENU
 
 
+walkRight = [py.image.load('Game\R1.png'), py.image.load('Game\R2.png'), py.image.load('Game\R3.png'), py.image.load('Game\R4.png'), py.image.load('Game\R5.png'), py.image.load(''), py.image.load('Game/R7.png'), py.image.load('Game/R8.png'), py.image.load('Game/R9.png')]
+walkLeft = [py.image.load('Game\L1.png'), py.image.load('Game/L2.png'), py.image.load('Game/L3.png'), py.image.load('Game/L4.png'), py.image.load('Game/L5.png'), py.image.load('Game/L6.png'), py.image.load('Game/L7.png'), py.image.load('Game/L8.png'), py.image.load('Game/L9.png')]
+bg = py.image.load('gameimages\grassbkgimage2.jpg')
+char = py.image.load('Game|standing.png')
+bush=py.image.load('gameimages\hedgeformazegame_adobespark300.png')
+bushup=py.image.load('gameimages\hedgeformazegame_adobespark300up.png')
+star=py.image.load('gameimages\pixelatedstarnobkg50.png')
+
+# walkRight = [py.image.load('Game\R1.png'), py.image.load('Game\R2.png'), py.image.load('Game\R3.png'), py.image.load('Game\R4.png'), py.image.load('Game\R5.png'), py.image.load('Game\R6.png'), py.image.load('Game\R7.png'), py.image.load('Game\R8.png'), py.image.load('Game\R9.png')]
+# walkLeft = [py.image.load('Game\L1.png'), py.image.load('Game\L2.png'), py.image.load('Game\L3.png'), py.image.load('Game\L4.png'), py.image.load('Game\L5.png'), py.image.load('Game\L6.png'), py.image.load('Game\L7.png'), py.image.load('Game\L8.png'), py.image.load('Game\L9.png')]
+# bg = py.image.load('gameimages\grassbkgimage2.jpg')
+# char = py.image.load('Game\standing.png')
+# bush=py.image.load('gameimages\hedgeformazegame_adobespark300.png')
+# bushup=pygame.image.load('gameimages\hedgeformazegame_adobespark300up.png')
+# star=pyg.image.load('gameimages\pixelatedstarnobkg50.png')
+# walkRight = [py.image.load('Game/R1.png'), py.image.load('Game/R2.png'), py.image.load('Game/R3.png'), py.image.load('Game/R4.png'), py.image.load('Game/R5.png'), py.image.load('Game/R6.png'), pygame.image.load('Game/R7.png'), pygame.image.load('Game/R8.png'), pygame.image.load('Game/R9.png')]
+# walkLeft = [pygame.image.load('Game/L1.png'), pygame.image.load('Game/L2.png'), pygame.image.load('Game/L3.png'), pygame.image.load('Game/L4.png'), pygame.image.load('Game/L5.png'), pygame.image.load('Game/L6.png'), pygame.image.load('Game/L7.png'), pygame.image.load('Game/L8.png'), pygame.image.load('Game/L9.png')]
+# bg = pygame.image.load('Game/bg.jpg')
+# char = pygame.image.load('Game/standing.png')
+
+x = 50
+y = 400
+width = 40
+height = 60
+vel = 5
+
+left = False
+right = False
+walkCount = 0
+
 py.init()
 BLACK=(0,0,0)
 WHITE=(255,255,255)
@@ -22,7 +52,7 @@ GREEN=(0,128,0)
 MenuMessages=["Instructions", "Level 1", "Level 2", "Settings", "Scoreboard", "Exit"]
 settingsmessages=["Background Color","Screen Size"]
 bkgcolors=["Black", "Blue", "Green"]
-scrnsizemessages=["900 x 900", "1400 x 1400", "800 x 800"]
+scrnsizemessages=["1000x1000", "900x900", "800 x 800"]
 InstructionsMessages=["Collect all the Stars", "Finish the maze", "Use arrow keys to move", "There is no jumping", "You can move up and down with arrows"]
 WIDTH=800
 HEIGHT=800
@@ -93,21 +123,122 @@ def display_Instructions(messages):
 #         py.time.delay(100)
 #         y+=80
 #         square.y=y
+
+def redrawGameWindow(x,y):
+    x=70
+    y=190
+    global walkCount
+
+    window.blit(bg, (0,0))  
+    if walkCount + 1 >= 27:
+        walkCount = 0
     
-def display_level1():
-    bg = py.image.load('gameimages/grassbkgimage2.jpg')
+    window.blit(bush,(0,50))
+    window.blit(bushup,(200,50))
+    window.blit(star,(20,200))
+    window.blit(bush,(140,300))
+    window.blit(bush,(200,500))
+
+    if left:  
+        window.blit(walkLeft[walkCount//3], (x,y))
+        walkCount += 1                          
+    elif right:
+        window.blit(walkRight[walkCount//3], (x,y))
+        walkCount += 18
+    else:
+        window.blit(char, (x, y))
+        walkCount = 0
+        
+    py.display.update() 
+# def redrawGameWindow(x,y):
+#     x=70
+#     y=190
+#     global walkCount  
+#     if walkCount + 1 >= 27:
+#         walkCount =0
+#     if left:  
+#         window.blit(walkLeft[walkCount//3], (x,y))
+#         walkCount += 1                          
+#     elif right:
+#         window.blit(walkRight[walkCount//3], (x,y))
+#         walkCount += 1
+#     else:
+#         window.blit(char, (x, y))
+#         walkCount = 0
+#     py.display.update() 
+ 
+
+clock=py.time.Clock()
+check=True
+def charanimation(keys):
+    global x
+    global y
+    print(x,y)
+    run=True
+    while run:
+    #     while check:
+    #         clock.tick(27)
+    #         for event in py.event.get():
+    #             if event.type == py.QUIT:
+                 
+    #         keys = py.key.get_pressed()
+        for eve.key=py.KEYDOWN:
+            if keys[py.K_LEFT] and x > vel: 
+                x -= vel
+                left = True
+                right = False
+            elif keys[py.K_RIGHT] and x < 800 - vel - width:  
+                x += vel
+                left = False
+                right = True
+            elif keys[py.K_UP] and y<800 - vel - width:
+                y+=vel
+            elif keys[py.K_DOWN] and y>vel:
+                y-=vel
+            else: 
+                left = False
+                right = False
+                walkCount = 0
+    redrawGameWindow(x,y) 
+
+def display_level1(keys):
+    bg = py.image.load('gameimages\grassbkgimage2.jpg')
     window.blit(bg, (0,0))
     py.display.set_caption("Grassy Level Maze")
     levelBackRect=display_Title("Quit", 750)
     py.display.flip()
-    #py.draw.rect
+    x=70
+    y=190
+    if keys[py.K_LEFT] and x > vel: 
+        x -= vel
+        left = True
+        right = False
+    elif keys[py.K_RIGHT] and x < 500 - vel - width:  
+        x += vel
+        left = False
+        right = True
+    elif keys[py.K_UP] and y<500 - vel - width:
+        y+=vel
+    elif keys[py.K_DOWN] and y>vel:
+        y-=vel
+    else: 
+        left = False
+        right = False
+        walkCount = 0
+    redrawGameWindow(x,y)
+    charanimation(keys)
+        
+    
 
 def display_level2():
-    bg = py.image.load('gameimages/stonebkgimage2.png')
+    bg = py.image.load('gameimages\stonebkgimage2.png')
     window.blit(bg, (0,0))
     py.display.set_caption("Stone Maze")
     levelBackRect=display_Title("Quit", 750)
     py.display.flip()
+    redrawGameWindow(x,y)
+    charanimation(keys)
+    
 
 bkgcolor=BLACK
 window.fill(bkgcolor)
@@ -123,7 +254,9 @@ while run:
         if eve.type == py.QUIT: #pygame.QUIT is looking for a key pressed, while pygame.quit() is a function
             run=False
         mouse_pos=(0,0)
-
+        keys = py.key.get_pressed()
+        if keys[py.K_UP]:
+            print("UP")
         if eve.type==py.MOUSEBUTTONDOWN:
             mouse_pressed=py.mouse.get_pressed()
             if mouse_pressed[0]:
@@ -146,7 +279,7 @@ while run:
                     window.fill(bkgcolor)
                     py.display.update()
                     currentDisplay=DISPLAY_LEVEL1
-                    display_level1()
+                    display_level1(keys)
                     #play game here
 
                 if mouse_pos[0]>=70 and mouse_pos[0]<=95 and mouse_pos[1]>=345 and mouse_pos[1]<=375: #71, 193. 93,193. 93, 212. 71, 211
@@ -237,12 +370,7 @@ while run:
                 py.display.update()
                 currentDisplay=DISPLAY_SETTINGS_SCREEN_SIZE
             
-            elif currentDisplay==DISPLAY_SETTINGS and mouse_pos[0]>=70 and mouse_pos[0]<=95 and mouse_pos[1]>=340 and mouse_pos[1]<=370:
-                window.fill(bkgcolor)
-                display_Title("Sound On/Off", 70)
-                display_Title("Back", 750)
-                py.display.update()
-                currentDisplay=DISPLAY_SETTINGS_SOUND
+           
             
             # elif currentDisplay==DISPLAY_SETTINGS and mouse_pos[0]>=70 and mouse_pos[0]<=95 and mouse_pos[1]>=430 and mouse_pos[1]<=460:
             #     window.fill(bkgcolor)
@@ -304,7 +432,7 @@ while run:
 
           
             elif currentDisplay==DISPLAY_SETTINGS_SCREEN_SIZE and mouse_pos[0]>=70 and mouse_pos[0]<=95 and mouse_pos[1]>=200 and mouse_pos[1]<=225:
-                window=py.display.set_mode((900,900))
+                window=py.display.set_mode((1000,1000))
                 window.fill(bkgcolor)
                 display_Title("Background Color", 70)
                 display_Menu(scrnsizemessages)
@@ -312,7 +440,7 @@ while run:
                 py.display.update()  
 
             elif currentDisplay==DISPLAY_SETTINGS_SCREEN_SIZE and mouse_pos[0]>=70 and mouse_pos[0]<=95 and mouse_pos[1]>=250 and mouse_pos[1]<=300:
-                window=py.display.set_mode((1400,1400))
+                window=py.display.set_mode((900,900))
                 window.fill(bkgcolor)
                 display_Title("Screen Size", 70)
                 display_Menu(scrnsizemessages)
@@ -328,3 +456,5 @@ while run:
                 py.display.update()    
 py.quit()
 
+#way to force images togther:
+#py.transform
