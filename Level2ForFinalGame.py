@@ -73,7 +73,8 @@ def redrawGameWindow():
     window.blit(finish,(700,700))
 
     
-    
+   
+
 
     if left:  
         window.blit(walkLeft[walkCount//3], (x,y))

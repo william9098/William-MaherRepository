@@ -13,13 +13,15 @@ DISPLAY_SETTINGS_SCREEN_SIZE=9
 currentDisplay=DISPLAY_MAIN_MENU
 
 
-walkRight = [py.image.load('Game\R1.png'), py.image.load('Game\R2.png'), py.image.load('Game\R3.png'), py.image.load('Game\R4.png'), py.image.load('Game\R5.png'), py.image.load(''), py.image.load('Game/R7.png'), py.image.load('Game/R8.png'), py.image.load('Game/R9.png')]
-walkLeft = [py.image.load('Game\L1.png'), py.image.load('Game/L2.png'), py.image.load('Game/L3.png'), py.image.load('Game/L4.png'), py.image.load('Game/L5.png'), py.image.load('Game/L6.png'), py.image.load('Game/L7.png'), py.image.load('Game/L8.png'), py.image.load('Game/L9.png')]
+
+walkRight = [py.image.load('Game\R1.png'), py.image.load('Game\R2.png'), py.image.load('Game\R3.png'), py.image.load('Game\R4.png'), py.image.load('Game\R5.png'), py.image.load('Game\R6.png'), py.image.load('Game\R7.png'), py.image.load('Game\R8.png'), py.image.load('Game\R9.png')]
+walkLeft = [py.image.load('Game\L1.png'), py.image.load('Game\L2.png'), py.image.load('Game\L3.png'), py.image.load('Game\L4.png'), py.image.load('Game\L5.png'), py.image.load('Game\L6.png'), py.image.load('Game\L7.png'), py.image.load('Game\L8.png'), py.image.load('Game\L9.png')]
 bg = py.image.load('gameimages\grassbkgimage2.jpg')
-char = py.image.load('Game|standing.png')
+char = py.image.load('Game\standing.png')
 bush=py.image.load('gameimages\hedgeformazegame_adobespark300.png')
 bushup=py.image.load('gameimages\hedgeformazegame_adobespark300up.png')
-star=py.image.load('gameimages\pixelatedstarnobkg50.png')
+star=py.image.load('gameimages\pixelated_star_for_game50removedbkg.png')
+finish= py.image.load('gameimages\endofmazegame100x100.png')
 
 # walkRight = [py.image.load('Game\R1.png'), py.image.load('Game\R2.png'), py.image.load('Game\R3.png'), py.image.load('Game\R4.png'), py.image.load('Game\R5.png'), py.image.load('Game\R6.png'), py.image.load('Game\R7.png'), py.image.load('Game\R8.png'), py.image.load('Game\R9.png')]
 # walkLeft = [py.image.load('Game\L1.png'), py.image.load('Game\L2.png'), py.image.load('Game\L3.png'), py.image.load('Game\L4.png'), py.image.load('Game\L5.png'), py.image.load('Game\L6.png'), py.image.load('Game\L7.png'), py.image.load('Game\L8.png'), py.image.load('Game\L9.png')]
@@ -33,8 +35,8 @@ star=py.image.load('gameimages\pixelatedstarnobkg50.png')
 # bg = pygame.image.load('Game/bg.jpg')
 # char = pygame.image.load('Game/standing.png')
 
-x = 50
-y = 400
+x = 0
+y = 0
 width = 40
 height = 60
 vel = 5
@@ -182,7 +184,7 @@ def charanimation(keys):
     #             if event.type == py.QUIT:
                  
     #         keys = py.key.get_pressed()
-        for eve.key=py.KEYDOWN:
+        if eve.type==py.KEYDOWN:
             if keys[py.K_LEFT] and x > vel: 
                 x -= vel
                 left = True
