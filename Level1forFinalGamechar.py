@@ -52,7 +52,7 @@ load_Star3=True
 MenuMessages=["Instructions", "Level 1", "Level 2", "Settings", "Scoreboard", "Exit"]
 
 x = 5
-y = 40
+y = 0
 width = 40
 height = 60
 vel = 10
@@ -194,13 +194,6 @@ while check:
             x += vel
             left = False
             right = True
-
-        elif keys[py.K_RIGHT] and x>=210 and x<800 and y>140 and y>190:
-            x += vel
-            left = False
-            right = True
-
-    
 
         elif keys[py.K_DOWN] and y<800 - vel - width:
             y+=vel

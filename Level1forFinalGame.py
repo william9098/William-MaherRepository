@@ -2,12 +2,19 @@ import pygame as py
 from pygame.constants import K_LEFT
 
 
+
+
 # from FinalGame import BLACK
 py.init()
-finish_collidex=(range(750,750))
-finish_colldiey=(range(750, 750))
-star_collide2x=(range(415,460))
-star_collide2y=(range(656,711))
+finish_collidex=(range(700,750))
+finish_colldiey=(range(700, 750))
+
+star_collide1x=(range(20,65))
+star_collide1y=(range(200,245))
+star_collide2x=(range(430,479))
+star_collide2y=(range(620,670))
+star_collide3x=(range(726,771))
+star_collide3y=(range(200,249))
 score=0
 
 
@@ -16,11 +23,16 @@ score=0
 # window.blit(star,(20,200))
 #     window.blit(star,(726,200))
 #     window.blit(star,(415, 656))
+# window.blit(star,(430, 620))
 
-BLACK= (0,0,0)
+BLACK=(0,0,0)
+WHITE=(255,255,255)
+RED= (150, 0, 0)
+BLUE=(0, 0,255)
+GREEN=(0,128,0)
 
 window = py.display.set_mode((800,800))
-py.display.set_caption("Only 1% Can Complete")
+py.display.set_caption("Grassy Level Maze")
 windowRect = window.get_rect()
 
 walkRight = [py.image.load('Game\R1.png'), py.image.load('Game\R2.png'), py.image.load('Game\R3.png'), py.image.load('Game\R4.png'), py.image.load('Game\R5.png'), py.image.load('Game\R6.png'), py.image.load('Game\R7.png'), py.image.load('Game\R8.png'), py.image.load('Game\R9.png')]
@@ -32,12 +44,14 @@ bushup=py.image.load('gameimages\hedgeformazegame_adobespark300up.png')
 star=py.image.load('gameimages\pixelated_star_for_game50removedbkg.png')
 finish= py.image.load('gameimages\endofmazegame100x100.png')
 
+load_Star1=True
 load_Star2=True
+load_Star3=True
 
 
+MenuMessages=["Instructions", "Level 1", "Level 2", "Settings", "Scoreboard", "Exit"]
 
-
-x = 0
+x = 5
 y = 0
 width = 40
 height = 60
@@ -54,9 +68,23 @@ SubTitle=py.font.SysFont('comicsans', 20, italic=True)
 text=TITLE_FONT.render("message", 1, BLACK)
 wbox=25
 hbox=25
-x=70
-y=190
 square=py.Rect(10,10, wbox, hbox)
+
+
+def display_Menu(messages):
+    x=70
+    y=190
+    square.x=x
+    square.y=y
+    for i in range(0, len(messages)):
+        word=messages[i]
+        py.draw.rect(window, RED, square)
+        text=TITLE_FONT.render(word, 1, WHITE)
+        window.blit(text, (x+wbox+10,y))
+        py.display.flip()
+        py.time.delay(100)
+        y+=80
+        square.y=y
 
 
 def display_Title(message,y):
@@ -82,9 +110,10 @@ def redrawGameWindow():
     window.blit(bush,(0,50))
     window.blit(bush,(140,300))
     window.blit(bush,(450,300))
-    window.blit(bush,(160, 700))
-    window.blit(bush,(420, 700))
+    # window.blit(bush,(160, 700))
+    window.blit(bush,(275, 700))
     window.blit(bush,(360, 500))
+    
     
     window.blit(bushup,(200,50))
     window.blit(bushup,(553,50))
@@ -92,10 +121,14 @@ def redrawGameWindow():
     window.blit(bushup,(50,300))
     window.blit(bushup,(260,500))
     
-    window.blit(star,(20,200))
-    window.blit(star,(726,200))
+    if load_Star1:
+        window.blit(star,(20,200))
+
     if load_Star2:
-        window.blit(star,(415, 656))
+        window.blit(star,(430, 620))
+
+    if load_Star3:
+        window.blit(star,(726,200))
     
 
     window.blit(finish,(700,700))
@@ -145,27 +178,56 @@ while check:
         elif event.type==py.KEYDOWN:   
             keys = py.key.get_pressed()
 
-
-    # if event.type==py.KEYDOWN:
-    #     if event.key== py.K_LEFT:
-    #         moveRight=False
-    #         moveLeft=True
-
-    #     if event.key==py.K_RIGHT
-    #         moveRight=True
-
-
         
 
-        if keys[py.K_RIGHT] and x>=0 and x<540:
+        if keys[py.K_RIGHT] and x>-10 and x<540 and y>=0 and y<260:
             x += vel
             left = False
             right = True
         
-        elif keys[py.K_RIGHT] and y>350 and y<800:
+        elif keys[py.K_RIGHT] and x>-10 and x<800 and y>400 and y<500:
+            x+=vel
+            left=False
+            right=True
+
+
+        elif keys[py.K_RIGHT] and x>140 and x<790 and y>=370 and y<720:
             x += vel
-            left = False
-            right = True
+            left=False
+            right=True
+
+
+        elif keys[py.K_RIGHT] and x>680 and x<800 and y>=0 and y<800:
+            x+=vel
+            left=False
+            right=True
+
+
+        elif keys[py.K_RIGHT] and x>=0 and x<200 and y>175 and y<300:
+            x+=vel
+            left=False
+            right=True
+
+        elif keys[py.K_RIGHT] and x>-10 and x<250 and y>300 and y<800:
+            x+=vel
+            left=False
+            right=True
+
+        elif keys[py.K_RIGHT] and x>-10 and x<175 and y>720 and y<800:
+            x+=vel
+            left=False
+            right=True
+
+        elif keys[py.K_RIGHT] and x>=365 and x<790 and y>600 and y<715:
+            x += vel
+            left=False
+            right=True
+
+
+
+
+
+
             
         # elif keys[py.K_LEFT] and x>=0 and x<600:
         #     x -= vel
@@ -177,60 +239,125 @@ while check:
             left=True
             right=False
 
-        elif keys[py.K_LEFT] and x>300 and x<600 and y>=0 and y<260:
+        elif keys[py.K_LEFT] and x>300 and x<600 and y>=0 and y<=260:
             x -= vel
             left=True
             right=False
 
-        elif keys[py.K_LEFT] and y>170 and y<580 and x>150 and x<800:
+        elif keys[py.K_LEFT] and y>=370 and y<580 and x>150 and x<800:
             x -= vel
             left=True
             right=False
 
-        elif keys[py.K_LEFT] and y>580 and y<720 and x>=0 and x<800:
+        elif keys[py.K_LEFT] and y>560 and y<720 and x>=0 and x<290:
             x -= vel
             left=True
             right=False
-        
+
+
+
+        elif keys[py.K_LEFT] and x>=0 and x<220 and y>175 and y<300:
+            x -= vel
+            left=True
+            right=False
+
+
+        elif keys[py.K_LEFT] and x>370 and x<790 and y>600 and y<715:
+            x -= vel
+            left=True
+            right=False
+
+
      
 
         elif keys[py.K_DOWN] and x>270 and x<540 and y>=0 and y<260:
             y+=vel
         
-        elif keys[py.K_DOWN] and x>360 and x<430 and y>=0 and y<460: #need to change this y i think its wrong, character stops in mid bush
+        elif keys[py.K_DOWN] and x>380 and x<430 and y>=0 and y<460: #need to change this y i think its wrong, character stops in mid bush
             y+=vel
 
-        elif keys[py.K_DOWN] and x>=0 and x<800 and y>400 and y<460:
+        elif keys[py.K_DOWN] and x>=0 and x<800 and y>370 and y<460:
             y+=vel
 
-        elif keys[py.K_DOWN] and x>610 and x<800 and y>=0 and y<800:
+        elif keys[py.K_DOWN] and x>670 and x<800 and y>=0 and y<260:
+            y+=vel
+
+        elif keys[py.K_DOWN] and x>630 and x<800 and y>=0 and y<800:
+            y+=vel
+         
+        elif keys[py.K_DOWN] and x>140 and x<265 and y>=370 and y<800:
             y+=vel
         
-        elif keys[py.K_DOWN] and x>140 and x<265 and y>430 and y<660:
+        elif keys[py.K_DOWN] and x>=0 and x<175 and y>600 and y<725:
             y+=vel
+
+        elif keys[py.K_DOWN] and x>-10 and x<150 and y>=150 and y<725:
+            y+=vel
+
         
         
-    
-        elif keys[py.K_UP] and y>vel:
+        # elif keys[py.K_UP] and y>vel:
+        #     y-=vel
+        
+
+        elif keys[py.K_UP] and x>270 and x<540 and y>=0 and y<260:
             y-=vel
+
+        elif keys[py.K_UP] and x>380 and x<430 and y>=0 and y<=460:
+            y-=vel
+
+        elif keys[py.K_UP] and x>=0 and x<800 and y>370 and y<=460:
+            y-=vel
+
+        elif keys[py.K_UP] and x>640 and x<800 and y>=0 and y<800:
+            y-=vel
+
+         
+        elif keys[py.K_UP] and x>140 and x<265 and y>430 and y<800:
+            y-=vel
+
+        elif keys[py.K_UP] and x>=0 and x<175 and y>600 and y<725:
+            y-=vel
+
+        elif keys[py.K_UP] and x>-10 and x<150 and y>150 and y<725:
+            y-=vel
+        
+        
+
+
+
         else: 
             left = False
             right = False
             walkCount = 0
         print(x,y)
-        if x in star_collide2x and y in star_collide2y:
 
-            print("i am here")
+        if x in star_collide1x and y in star_collide1y and load_Star1:
+            score+=1
+            load_Star1=False
+
+        if x in star_collide2x and y in star_collide2y and load_Star2:
             score+=1
             load_Star2=False
+
+        if x in star_collide3x and y in star_collide3y and load_Star3:
+            score+=1
+            load_Star3=False
+
+
         
-        if x in finish_collidex and y in finish_colldiey:
-            window.fill(BLACK)
-            py.display.set_caption("Main Menu Window")
-            py.display.update()
+        
+
+        redrawGameWindow() 
+
             
         # if x in finishcollidex
-        redrawGameWindow() 
+    if x in finish_collidex and y in finish_colldiey:
+            window.fill(BLACK)
+            py.display.set_caption("Main Menu Window")
+            display_Title("Main Menu", 70)
+            display_Menu(MenuMessages)
+            py.display.flip()       
     
     
 py.quit()
