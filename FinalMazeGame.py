@@ -1,6 +1,6 @@
 import pygame as py, os, random, time
 
-# #Using Code from mainmenu code, andrew helped me
+#All of my menu code is from the Menu we designed earlier this year, andrew helped me out with this.
 DISPLAY_MAIN_MENU=0
 DISPLAY_INSTRUCTIONS=1
 DISPLAY_LEVEL1=2
@@ -15,12 +15,13 @@ currentDisplay=DISPLAY_MAIN_MENU
 
 
 
-#Level 1 Code:
+
 from pygame.constants import K_LEFT
 
 
-# from FinalGame import BLACK
+#Level 1 Code:
 py.init()
+#Ian bock helped me with collide points
 finish_collidex=(range(700,750))
 finish_colldiey=(range(700, 750))
 
@@ -58,7 +59,7 @@ GREEN=(0,128,0)
 window = py.display.set_mode((800,800))
 
 
-
+#walkRight, walkLeft, and char are from TechWithTim
 walkRight = [py.image.load('Game\R1.png'), py.image.load('Game\R2.png'), py.image.load('Game\R3.png'), py.image.load('Game\R4.png'), py.image.load('Game\R5.png'), py.image.load('Game\R6.png'), py.image.load('Game\R7.png'), py.image.load('Game\R8.png'), py.image.load('Game\R9.png')]
 walkLeft = [py.image.load('Game\L1.png'), py.image.load('Game\L2.png'), py.image.load('Game\L3.png'), py.image.load('Game\L4.png'), py.image.load('Game\L5.png'), py.image.load('Game\L6.png'), py.image.load('Game\L7.png'), py.image.load('Game\L8.png'), py.image.load('Game\L9.png')]
 bg = py.image.load('gameimages\grassbkgimage2.jpg')
@@ -122,27 +123,7 @@ BLUE=(0, 0,255)
 GREEN=(0,128,0)
 
 
-# myFile=open('scoreformazegame.txt', 'w')
-# myFile.write("aklsdfj")
-# myFile.close()
-# #read and print the file
-# # if you want to remove what you said b4 if you use write but if you use append it doesnt
 
-# fileMy=open('score.txt', 'r')
-# print(fileMy.read())
-# fileMy.close()
-# score=0
-# anotherFile= open('score.txt','a')
-# anotherFile.write("\n the highest score: \t" + str(score))
-# anotherFile.close()
-
-#############
-
-
-#TITLE_FONT=pygame.font.SysFont(name, size, bold=False, italic=False)
-
-
-#when you want to draw a rectangle you use 'rect' when you want to create a rectangle use 'Rect'
 
 def display_Title(message,y):
     #py.time.delay(100)
@@ -183,20 +164,6 @@ def display_Instructions(messages):
         square.y=y
 
 
-# def display_Scoreboard(messages):
-#     x=70
-#     y=190
-#     square.x=x
-#     square.y=y
-#     for i in range(0, len(messages)):
-#         word=messages[i]
-#         myFile=open('mazegamescore.txt', 'r')
-#         text=INSTRUCTIONS_FONT.render(word, 1, WHITE)
-#         window.blit(text, (x+wbox+10,y))
-#         py.display.flip()
-#         py.time.delay(100)
-#         y+=80
-#         square.y=y
 
 def display_Scoreboard():
     global scoreboardBackRect
@@ -214,6 +181,7 @@ def display_Scoreboard():
     return DISPLAY_SCOREBOARD
 
 
+#TechWithTimCode:
 def redrawGameWindowlvl1():
     global walkCount
 
@@ -323,7 +291,7 @@ def redrawGameWindowlvl2():
     
 
 
-
+#TechWithTime Code:
 clock=py.time.Clock()
 check=True
 def charanimation(keys):
@@ -332,12 +300,6 @@ def charanimation(keys):
     print(x,y)
     run=True
     while run:
-    #     while check:
-    #         clock.tick(27)
-    #         for event in py.event.get():
-    #             if event.type == py.QUIT:
-                 
-    #         keys = py.key.get_pressed()
         if eve.type==py.KEYDOWN:
             if keys[py.K_LEFT] and x > vel: 
                 x -= vel
@@ -356,19 +318,13 @@ def charanimation(keys):
                 right = False
                 walkCount = 0
     redrawGameWindowlvl1(x,y) 
-
+#TechWithTimCode
 def charanimation2(keys):
     global x
     global y
     print(x,y)
     run=True
     while run:
-    #     while check:
-    #         clock.tick(27)
-    #         for event in py.event.get():
-    #             if event.type == py.QUIT:
-                 
-    #         keys = py.key.get_pressed()
         if eve.type==py.KEYDOWN:
             if keys[py.K_LEFT] and x > vel: 
                 x -= vel
@@ -388,6 +344,7 @@ def charanimation2(keys):
                 walkCount = 0
     redrawGameWindowlvl2(x,y)             
 
+#TechWithTimCode
 def display_level1(keys):
     bg = py.image.load('gameimages\grassbkgimage2.jpg')
     window.blit(bg, (0,0))
@@ -415,7 +372,7 @@ def display_level1(keys):
     charanimation(keys)
         
     
-
+#TechWithTimCode
 def display_level2():
     bg = py.image.load('gameimages\lightgraybkg.jpg')
     window.blit(bg, (0,0))
@@ -452,7 +409,7 @@ display_Menu(MenuMessages)
 py.display.update()
 currentDisplay=DISPLAY_MAIN_MENU
 
-#counter=0
+#This was a class assignment from before
 run=True 
 while run:
     for eve in py.event.get():
@@ -479,13 +436,10 @@ while run:
                     display_Instructions(InstructionsMessages)
                     py.display.update()
                     currentDisplay=DISPLAY_INSTRUCTIONS
-                   
-                if mouse_pos[0]>=70 and mouse_pos[0]<=95 and mouse_pos[1]>=270 and mouse_pos[1]<=300: #71, 193. 93,193. 93, 212. 71, 211
-                    # window.fill(bkgcolor)
-                    # py.display.update()
-                    # currentDisplay=DISPLAY_LEVEL1
-                    # display_level1(keys)
-                    #play game here
+                  
+                   #Level 1 
+                   # movement has some basis in TechWithTimeCode
+                if mouse_pos[0]>=70 and mouse_pos[0]<=95 and mouse_pos[1]>=270 and mouse_pos[1]<=300:
                     keys=py.key.get_pressed()
                     check=True
 
@@ -518,11 +472,6 @@ while run:
                                 right=True
 
 
-                            # elif keys[py.K_RIGHT] and x>140 and x<790 and y>=370 and y<720:
-                            #     x += vel
-                            #     left=False
-                            #     right=True
-
 
                             elif keys[py.K_RIGHT] and x>680 and x<725 and y>=0 and y<725:
                                 x+=vel
@@ -535,11 +484,7 @@ while run:
                                 left=False
                                 right=True
 
-                            # elif keys[py.K_RIGHT] and x>-10 and x<250 and y>300 and y<800:
-                            #     x+=vel
-                            #     left=False
-                            #     right=True
-
+                            
 
                             elif keys[py.K_RIGHT] and x>=-15 and x<=250 and y>460 and y<740:
                                 x += vel
@@ -643,9 +588,7 @@ while run:
 
                             
                             
-                            # elif keys[py.K_UP] and y>vel:
-                            #     y-=vel
-                            
+                          
 
                             elif keys[py.K_UP] and x>270 and x<540 and y>10 and y<=260:
                                 y-=vel
@@ -683,6 +626,8 @@ while run:
                                 walkCount = 0
                             print(x,y)
 
+
+                            #Scoring System
                             if x in star_collide1x and y in star_collide1y and load_Star1:
                                 score+=1
                                 myFile=open('mazegamescore.txt', 'w') #here we creat the file object
@@ -714,7 +659,7 @@ while run:
                             redrawGameWindowlvl1() 
 
                             
-                            # if x in finishcollidex
+                            # Getting out of the Game
                         if x in finish_collidex and y in finish_colldiey:
                             window.fill(BLACK)
                             py.display.set_caption("Main Menu Window")
@@ -725,7 +670,7 @@ while run:
                             currentDisplay=DISPLAY_MAIN_MENU         
     
 
-
+                #Level 2 (very simmilar to level 1, so basis of movement from TechWithTim)
                 if mouse_pos[0]>=70 and mouse_pos[0]<=95 and mouse_pos[1]>=345 and mouse_pos[1]<=375: #71, 193. 93,193. 93, 212. 71, 211
                     keys=py.key.get_pressed()
                     check2=True
@@ -749,11 +694,6 @@ while run:
                             elif event.type==py.KEYDOWN:   
                                 keys = py.key.get_pressed()
 
-
-                            # if keys[py.K_LEFT] and x > vel: 
-                            #     x -= vel
-                            #     left = True
-                            #     right = False
 
 
                             if keys[py.K_LEFT] and x>=0 and x<=575 and y>=0 and y<=110:
@@ -947,9 +887,6 @@ while run:
                             
 
 
-                            #265,520
-                            # elif keys[py.K_UP] and y>vel:
-                            #     y-=vel
                             else: 
                                 left = False
                                 right = False
@@ -958,7 +895,7 @@ while run:
                             print(x,y)
 
                             
-                            
+                            #Scoring System
                             if x in Lvl2star_collide1x and y in Lvl2star_collide1y and Level2load_Star1:
                                 score2+=1
                                 myFile=open('mazegamescore.txt', 'w') #here we creat the file object
@@ -992,7 +929,7 @@ while run:
                             redrawGameWindowlvl2() 
 
                             
-                            # if x in finishcollidex
+                            # Getting Out of the Game
                         if x in finish_collide2x and y in finish_colldie2y:
                             window.fill(BLACK)
                             py.display.set_caption("Main Menu Window")
@@ -1008,14 +945,11 @@ while run:
 
                            
 
-                            # if x in Lvl2finish_collidex and y in Lvl2finish_colldiey:
-                            #     window.fill(BLACK)
-                            #     py.display.flip()
 
     
 
                          
-
+                #Settings
                 if mouse_pos[0] >= 70 and mouse_pos[0] <= 95 and mouse_pos[1]>=400 and mouse_pos[1]<=455:  #75, 435 (top left) 95, 435, (top right) bottom right: 95, 455,  bottom left: 75,
                     window.fill(bkgcolor)
                     py.display.set_caption("Settings Window")
@@ -1025,6 +959,7 @@ while run:
                     py.display.update()
                     currentDisplay=DISPLAY_SETTINGS
 
+                #Scoreboard
                 if mouse_pos[0] >= 70 and mouse_pos[0] <= 95 and mouse_pos[1]>=505 and mouse_pos[1]<=535:  #75, 435 (top left) 95, 435, (top right) bottom right: 95, 455,  bottom left: 75,
                     window.fill(bkgcolor)
                     py.display.set_caption("Scoreboard Window")
@@ -1102,13 +1037,7 @@ while run:
 
 
 
-        # elif currentDisplay==DISPLAY_SETTINGS and mouse_pos[0]>=70 and mouse_pos[0]<=95 and mouse_pos[1]>=430 and mouse_pos[1]<=460:
-        #     window.fill(bkgcolor)
-        #     display_Title("Screen Size", 70)
-        #     display_Menu(scrnsizemessages)
-        #     display_Title("Back", 750)
-        #     py.display.update()
-        #     currentDisplay=DISPLAY_SETTINGS_SCREEN_SIZE
+    
 
         # Back Button Code for Settings:
             elif currentDisplay==DISPLAY_SETTINGS_BACKGROUND_COLOR and mouse_pos[0] >= 355 and mouse_pos[0] <= 465 and mouse_pos[1]>=750 and mouse_pos[1]<=795:
@@ -1186,5 +1115,3 @@ while run:
                 py.display.update()    
 py.quit()
 
-#way to force images togther:
-#py.transform
