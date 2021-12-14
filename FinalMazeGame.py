@@ -164,7 +164,7 @@ def display_Instructions(messages):
         square.y=y
 
 
-
+#Andrew helped me with this 
 def display_Scoreboard():
     global scoreboardBackRect
     window.fill(bkgcolor)
@@ -661,7 +661,7 @@ while run:
                             
                             # Getting out of the Game
                         if x in finish_collidex and y in finish_colldiey:
-                            window.fill(BLACK)
+                            window.fill(bkgcolor)
                             py.display.set_caption("Main Menu Window")
                             display_Title("Main Menu", 70)
                             display_Menu(MenuMessages)
@@ -931,7 +931,7 @@ while run:
                             
                             # Getting Out of the Game
                         if x in finish_collide2x and y in finish_colldie2y:
-                            window.fill(BLACK)
+                            window.fill(bkgcolor)
                             py.display.set_caption("Main Menu Window")
                             display_Title("Main Menu", 70)
                             display_Menu(MenuMessages)
@@ -1018,7 +1018,7 @@ while run:
                 currentDisplay=DISPLAY_MAIN_MENU
             #End of Back Button Code for Main Menu
 
-        #Settings Code:
+        #BACKGROUND COLOR AND SCREEN SIZE
             elif currentDisplay==DISPLAY_SETTINGS and mouse_pos[0]>=70 and mouse_pos[0]<=95 and mouse_pos[1]>=190 and mouse_pos[1]<=220:
                 window.fill(bkgcolor)
                 display_Title("Background Color", 70)
@@ -1039,7 +1039,7 @@ while run:
 
     
 
-        # Back Button Code for Settings:
+        # Back Code for Background Color and Screen SIze
             elif currentDisplay==DISPLAY_SETTINGS_BACKGROUND_COLOR and mouse_pos[0] >= 355 and mouse_pos[0] <= 465 and mouse_pos[1]>=750 and mouse_pos[1]<=795:
                 window.fill(bkgcolor)
                 display_Title("Settings", 70)
