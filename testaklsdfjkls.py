@@ -52,7 +52,7 @@ load_Star3=True
 MenuMessages=["Instructions", "Level 1", "Level 2", "Settings", "Scoreboard", "Exit"]
 
 x = 5
-y = 40
+y = 0
 width = 40
 height = 60
 vel = 10
@@ -115,7 +115,9 @@ def redrawGameWindow():
     window.blit(stonewall,(280, 490))
     window.blit(stonewall,(50,490))
     window.blit(stonewall,(636,465))
-    window.blit(stonewall,(236,147))
+    window.blit(stonewall,(236,100))
+    # window.blit(stonewall,(245,147))
+    # window.blit(stonewall,(245,90))
     
 
     window.blit(stonewallup,(195,100))
@@ -128,6 +130,7 @@ def redrawGameWindow():
     window.blit(stonewallup,(605,530))
     # window.blit(stonewallup,(246, 335))
     window.blit(stonewallup,(246, 685))
+    
 
     
     window.blit(star,(20,200))
@@ -136,8 +139,9 @@ def redrawGameWindow():
     
 
     window.blit(finish,(700,700))
-    
    
+    
+
 
     # if x>720 and x<790 and y>750 and y<785:
     #     window.fill(BLACK)
@@ -184,42 +188,184 @@ while check:
         elif event.type==py.KEYDOWN:   
             keys = py.key.get_pressed()
 
+        
 
-        if keys[py.K_LEFT] and x > vel: 
+        if keys[py.K_RIGHT] and x>-10 and x<540 and y>=0 and y<260:
+            x += vel
+            left = False
+            right = True
+        
+        elif keys[py.K_RIGHT] and x>-10 and x<800 and y>400 and y<500:
+            x+=vel
+            left=False
+            right=True
+
+
+        elif keys[py.K_RIGHT] and x>140 and x<790 and y>=370 and y<720:
+            x += vel
+            left=False
+            right=True
+
+
+        elif keys[py.K_RIGHT] and x>680 and x<800 and y>=0 and y<800:
+            x+=vel
+            left=False
+            right=True
+
+
+        elif keys[py.K_RIGHT] and x>=0 and x<200 and y>175 and y<300:
+            x+=vel
+            left=False
+            right=True
+
+        elif keys[py.K_RIGHT] and x>-10 and x<250 and y>300 and y<800:
+            x+=vel
+            left=False
+            right=True
+
+
+        elif keys[py.K_RIGHT] and x>=365 and x<790 and y>600 and y<715:
+            x += vel
+            left=False
+            right=True
+
+
+
+
+
+
+            
+        # elif keys[py.K_LEFT] and x>=0 and x<600:
+        #     x -= vel
+        #     left = True
+        #     right = False
+
+        elif keys[py.K_LEFT] and x>=0 and x<300 and y>=0 and y<60:
             x -= vel
-            left = True
-            right = False
+            left=True
+            right=False
 
-        elif keys[py.K_RIGHT] and x>=0 and x<525 and y>=0 and y>30:
-            x += vel
-            left = False
-            right = True
+        elif keys[py.K_LEFT] and x>300 and x<600 and y>=0 and y<=260:
+            x -= vel
+            left=True
+            right=False
 
-        elif keys[py.K_RIGHT] and x>=210 and x<800 and y>140 and y>190:
-            x += vel
-            left = False
-            right = True
+        elif keys[py.K_LEFT] and y>=370 and y<580 and x>150 and x<800:
+            x -= vel
+            left=True
+            right=False
 
-    
+        elif keys[py.K_LEFT] and y>560 and y<720 and x>=0 and x<290:
+            x -= vel
+            left=True
+            right=False
 
-        elif keys[py.K_DOWN] and y<800 - vel - width:
+
+
+        elif keys[py.K_LEFT] and x>=0 and x<200 and y>175 and y<300:
+            x-=vel
+            left=True
+            right=False
+
+
+        elif keys[py.K_LEFT] and x>370 and x<790 and y>600 and y<715:
+            x -= vel
+            left=True
+            right=False
+
+            #175,150, 0,150, 185,260
+     
+
+        elif keys[py.K_DOWN] and x>270 and x<540 and y>=0 and y<260:
+            y+=vel
+        
+        elif keys[py.K_DOWN] and x>380 and x<430 and y>=0 and y<460: #need to change this y i think its wrong, character stops in mid bush
             y+=vel
 
-        elif keys[py.K_UP] and y>vel:
+        elif keys[py.K_DOWN] and x>=0 and x<800 and y>370 and y<460:
+            y+=vel
+
+        elif keys[py.K_DOWN] and x>670 and x<800 and y>=0 and y<260:
+            y+=vel
+
+        elif keys[py.K_DOWN] and x>630 and x<800 and y>=0 and y<800:
+            y+=vel
+         
+        elif keys[py.K_DOWN] and x>140 and x<265 and y>=370 and y<800:
+            y+=vel
+        
+        elif keys[py.K_DOWN] and x>=0 and x<175 and y>600 and y<725:
+            y+=vel
+
+        elif keys[py.K_DOWN] and x>-10 and x<150 and y>=150 and y<725:
+            y+=vel
+
+        
+        
+        # elif keys[py.K_UP] and y>vel:
+        #     y-=vel
+        
+
+        elif keys[py.K_UP] and x>270 and x<540 and y>=0 and y<260:
             y-=vel
+
+        elif keys[py.K_UP] and x>380 and x<430 and y>=0 and y<=460:
+            y-=vel
+
+        elif keys[py.K_UP] and x>=0 and x<800 and y>370 and y<=460:
+            y-=vel
+
+        elif keys[py.K_UP] and x>640 and x<800 and y>=0 and y<800:
+            y-=vel
+
+         
+        elif keys[py.K_UP] and x>140 and x<265 and y>430 and y<800:
+            y-=vel
+
+        elif keys[py.K_UP] and x>=0 and x<175 and y>600 and y<725:
+            y-=vel
+
+        elif keys[py.K_UP] and x>-10 and x<150 and y>150 and y<800:
+            y-=vel
+        
+        
+
+
+
         else: 
             left = False
             right = False
             walkCount = 0
-
-        
-
-        
-
-        
         print(x,y)
 
-        redrawGameWindow()      
+        if x in star_collide1x and y in star_collide1y and load_Star1:
+            score+=1
+            load_Star1=False
+
+        if x in star_collide2x and y in star_collide2y and load_Star2:
+            score+=1
+            load_Star2=False
+
+        if x in star_collide3x and y in star_collide3y and load_Star3:
+            score+=1
+            load_Star3=False
+
+
+        
+        
+
+        redrawGameWindow() 
+
+            
+        # if x in finishcollidex
+    if x in finish_collidex and y in finish_colldiey:
+            window.fill(BLACK)
+            py.display.set_caption("Main Menu Window")
+            display_Title("Main Menu", 70)
+            display_Menu(MenuMessages)
+            py.display.flip()       
+    
+    
 py.quit()
 
 #elif right:

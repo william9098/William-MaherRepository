@@ -172,36 +172,7 @@ def redrawGameWindow(x,y):
 
 clock=py.time.Clock()
 check=True
-def charanimation(keys):
-    global x
-    global y
-    print(x,y)
-    run=True
-    while run:
-    #     while check:
-    #         clock.tick(27)
-    #         for event in py.event.get():
-    #             if event.type == py.QUIT:
-                 
-    #         keys = py.key.get_pressed()
-        if eve.type==py.KEYDOWN:
-            if keys[py.K_LEFT] and x > vel: 
-                x -= vel
-                left = True
-                right = False
-            elif keys[py.K_RIGHT] and x < 800 - vel - width:  
-                x += vel
-                left = False
-                right = True
-            elif keys[py.K_UP] and y<800 - vel - width:
-                y+=vel
-            elif keys[py.K_DOWN] and y>vel:
-                y-=vel
-            else: 
-                left = False
-                right = False
-                walkCount = 0
-    redrawGameWindow(x,y) 
+
 
 def display_level1(keys):
     bg = py.image.load('gameimages\grassbkgimage2.jpg')
@@ -209,26 +180,9 @@ def display_level1(keys):
     py.display.set_caption("Grassy Level Maze")
     levelBackRect=display_Title("Quit", 750)
     py.display.flip()
-    x=70
-    y=190
-    if keys[py.K_LEFT] and x > vel: 
-        x -= vel
-        left = True
-        right = False
-    elif keys[py.K_RIGHT] and x < 500 - vel - width:  
-        x += vel
-        left = False
-        right = True
-    elif keys[py.K_UP] and y<500 - vel - width:
-        y+=vel
-    elif keys[py.K_DOWN] and y>vel:
-        y-=vel
-    else: 
-        left = False
-        right = False
-        walkCount = 0
+
     redrawGameWindow(x,y)
-    charanimation(keys)
+
         
     
 
@@ -239,7 +193,7 @@ def display_level2():
     levelBackRect=display_Title("Quit", 750)
     py.display.flip()
     redrawGameWindow(x,y)
-    charanimation(keys)
+    
     
 
 bkgcolor=BLACK

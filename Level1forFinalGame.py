@@ -1,4 +1,5 @@
 import pygame as py
+
 from pygame.constants import K_LEFT
 
 
@@ -9,11 +10,11 @@ py.init()
 finish_collidex=(range(700,750))
 finish_colldiey=(range(700, 750))
 
-star_collide1x=(range(20,65))
-star_collide1y=(range(200,245))
+star_collide1x=(range(-5,54))
+star_collide1y=(range(400,450))
 star_collide2x=(range(430,479))
 star_collide2y=(range(620,670))
-star_collide3x=(range(726,771))
+star_collide3x=(range(720,771))
 star_collide3y=(range(200,249))
 score=0
 
@@ -32,7 +33,7 @@ BLUE=(0, 0,255)
 GREEN=(0,128,0)
 
 window = py.display.set_mode((800,800))
-py.display.set_caption("Grassy Level Maze")
+py.display.set_caption("Strawberry Fields")
 windowRect = window.get_rect()
 
 walkRight = [py.image.load('Game\R1.png'), py.image.load('Game\R2.png'), py.image.load('Game\R3.png'), py.image.load('Game\R4.png'), py.image.load('Game\R5.png'), py.image.load('Game\R6.png'), py.image.load('Game\R7.png'), py.image.load('Game\R8.png'), py.image.load('Game\R9.png')]
@@ -42,6 +43,12 @@ char = py.image.load('Game\standing.png')
 bush=py.image.load('gameimages\hedgeformazegame_adobespark300.png')
 bushup=py.image.load('gameimages\hedgeformazegame_adobespark300up.png')
 star=py.image.load('gameimages\pixelated_star_for_game50removedbkg.png')
+finish= py.image.load('gameimages\endofmazegame100x100.png')
+fence= py.image.load('gameimages\grassymazeFENCEnobkg100x97.png')
+strawberrybush=py.image.load('gameimages\Bushofstrawberryformazegame150.png')
+stonewall=py.image.load('gameimages\stone_wall_for_maze_game-removebg-preview.png')
+stonewallup=py.image.load('gameimages\stonewallformazegameup2.png')
+star=py.image.load('gameimages\pixelated_star_for_game50removedbkg - Copy.png')
 finish= py.image.load('gameimages\endofmazegame100x100.png')
 
 load_Star1=True
@@ -100,7 +107,7 @@ left = False
 right = False
 walkCount = 0
 
-def redrawGameWindow():
+def redrawGameWindowlvl1():
     global walkCount
 
     window.blit(bg, (0,0))  
@@ -110,10 +117,9 @@ def redrawGameWindow():
     window.blit(bush,(0,50))
     window.blit(bush,(140,300))
     window.blit(bush,(450,300))
-    # window.blit(bush,(160, 700))
     window.blit(bush,(275, 700))
     window.blit(bush,(360, 500))
-    
+    window.blit(bush,(440,700))
     
     window.blit(bushup,(200,50))
     window.blit(bushup,(553,50))
@@ -121,8 +127,18 @@ def redrawGameWindow():
     window.blit(bushup,(50,300))
     window.blit(bushup,(260,500))
     
+    window.blit(fence,(-15, 300))
+
+    window.blit(strawberrybush,(-15,145))
+    window.blit(strawberrybush,(-15,195))
+    window.blit(strawberrybush,(90, 145))
+    window.blit(strawberrybush,(-15, 245))
+    window.blit(strawberrybush,(90, 245))
+    window.blit(strawberrybush,(90, 200))
+
+    
     if load_Star1:
-        window.blit(star,(20,200))
+        window.blit(star,(5,450))
 
     if load_Star2:
         window.blit(star,(430, 620))
@@ -133,18 +149,6 @@ def redrawGameWindow():
 
     window.blit(finish,(700,700))
 
-    # if x>720 and x<790 and y>750 and y<785:
-    #     window.fill(BLACK)
-    #     py.display.set_caption("Main Menu Window")
-    #     py.display.update()
-    # # x>717 x<790, and y>710 y<790
-
-    # if x>20 and x<193 and y>324 and y<4523:
-        #remove star
-        #starcount+=1
-
-    
-    
 
     if left:  
         window.blit(walkLeft[walkCount//3], (x,y))
@@ -180,24 +184,24 @@ while check:
 
         
 
-        if keys[py.K_RIGHT] and x>-10 and x<540 and y>=0 and y<260:
+        if keys[py.K_RIGHT] and x>-10 and x<540 and y>=0 and y<=260:
             x += vel
             left = False
             right = True
         
-        elif keys[py.K_RIGHT] and x>-10 and x<800 and y>400 and y<500:
+        elif keys[py.K_RIGHT] and x>140 and x<725 and y>400 and y<500:
             x+=vel
             left=False
             right=True
 
 
-        elif keys[py.K_RIGHT] and x>140 and x<790 and y>=370 and y<720:
-            x += vel
-            left=False
-            right=True
+        # elif keys[py.K_RIGHT] and x>140 and x<790 and y>=370 and y<720:
+        #     x += vel
+        #     left=False
+        #     right=True
 
 
-        elif keys[py.K_RIGHT] and x>680 and x<800 and y>=0 and y<800:
+        elif keys[py.K_RIGHT] and x>680 and x<725 and y>=0 and y<725:
             x+=vel
             left=False
             right=True
@@ -208,31 +212,31 @@ while check:
             left=False
             right=True
 
-        elif keys[py.K_RIGHT] and x>-10 and x<250 and y>300 and y<800:
-            x+=vel
-            left=False
-            right=True
+        # elif keys[py.K_RIGHT] and x>-10 and x<250 and y>300 and y<800:
+        #     x+=vel
+        #     left=False
+        #     right=True
 
-        elif keys[py.K_RIGHT] and x>-10 and x<175 and y>720 and y<800:
-            x+=vel
-            left=False
-            right=True
 
-        elif keys[py.K_RIGHT] and x>=365 and x<790 and y>600 and y<715:
+        elif keys[py.K_RIGHT] and x>=-15 and x<=250 and y>460 and y<740:
             x += vel
             left=False
             right=True
 
 
+        elif keys[py.K_RIGHT] and x>355 and x<725 and y>600 and y<715:
+            x += vel
+            left=False
+            right=True
 
 
+        elif keys[py.K_RIGHT] and x>=615 and x<780 and y>500 and y<=580:
+            x += vel
+            left=False
+            right=True
 
+        
 
-            
-        # elif keys[py.K_LEFT] and x>=0 and x<600:
-        #     x -= vel
-        #     left = True
-        #     right = False
 
         elif keys[py.K_LEFT] and x>=0 and x<300 and y>=0 and y<60:
             x -= vel
@@ -244,7 +248,12 @@ while check:
             left=True
             right=False
 
-        elif keys[py.K_LEFT] and y>=370 and y<580 and x>150 and x<800:
+        elif keys[py.K_LEFT] and y>=370 and y<580 and x>150 and x<=250:
+            x -= vel
+            left=True
+            right=False
+
+        elif keys[py.K_LEFT] and y>=420 and y<500 and x>150 and x<=250:
             x -= vel
             left=True
             right=False
@@ -254,23 +263,34 @@ while check:
             left=True
             right=False
 
-
-
-        elif keys[py.K_LEFT] and x>=0 and x<220 and y>175 and y<300:
-            x -= vel
+        elif keys[py.K_LEFT] and x>=0 and x<200 and y>175 and y<300:
+            x-=vel
             left=True
             right=False
 
 
-        elif keys[py.K_LEFT] and x>370 and x<790 and y>600 and y<715:
+        elif keys[py.K_LEFT] and x>370 and x<=725 and y>=600 and y<715:
             x -= vel
             left=True
             right=False
 
+        elif keys[py.K_LEFT] and x>-15 and x<=250 and y>600 and y<740:
+            x -= vel
+            left=True
+            right=False
 
+        elif keys[py.K_LEFT] and x>=625 and x<780 and y>500 and y<580:
+            x -= vel
+            left=True
+            right=False
+
+        elif keys[py.K_LEFT] and x>140 and x<725 and y>=400 and y<=460:
+            x -= vel
+            left=True
+            right=False
      
 
-        elif keys[py.K_DOWN] and x>270 and x<540 and y>=0 and y<260:
+        elif keys[py.K_DOWN] and x>270 and x<540 and y>=-10 and y<=250:
             y+=vel
         
         elif keys[py.K_DOWN] and x>380 and x<430 and y>=0 and y<460: #need to change this y i think its wrong, character stops in mid bush
@@ -279,20 +299,24 @@ while check:
         elif keys[py.K_DOWN] and x>=0 and x<800 and y>370 and y<460:
             y+=vel
 
-        elif keys[py.K_DOWN] and x>670 and x<800 and y>=0 and y<260:
+        elif keys[py.K_DOWN] and x>670 and x<800 and y>-20 and y<260:
             y+=vel
 
-        elif keys[py.K_DOWN] and x>630 and x<800 and y>=0 and y<800:
+        elif keys[py.K_DOWN] and x>630 and x<800 and y>-20 and y<725:
             y+=vel
          
-        elif keys[py.K_DOWN] and x>140 and x<265 and y>=370 and y<800:
+        elif keys[py.K_DOWN] and x>140 and x<265 and y>=370 and y<725:
             y+=vel
         
         elif keys[py.K_DOWN] and x>=0 and x<175 and y>600 and y<725:
             y+=vel
 
-        elif keys[py.K_DOWN] and x>-10 and x<150 and y>=150 and y<725:
+        elif keys[py.K_DOWN] and x>-10 and x<150 and y>=350 and y<725:
             y+=vel
+
+
+
+        
 
         
         
@@ -300,7 +324,7 @@ while check:
         #     y-=vel
         
 
-        elif keys[py.K_UP] and x>270 and x<540 and y>=0 and y<260:
+        elif keys[py.K_UP] and x>270 and x<540 and y>10 and y<=260:
             y-=vel
 
         elif keys[py.K_UP] and x>380 and x<430 and y>=0 and y<=460:
@@ -309,7 +333,7 @@ while check:
         elif keys[py.K_UP] and x>=0 and x<800 and y>370 and y<=460:
             y-=vel
 
-        elif keys[py.K_UP] and x>640 and x<800 and y>=0 and y<800:
+        elif keys[py.K_UP] and x>670 and x<800 and y>=0 and y<800:
             y-=vel
 
          
@@ -319,7 +343,10 @@ while check:
         elif keys[py.K_UP] and x>=0 and x<175 and y>600 and y<725:
             y-=vel
 
-        elif keys[py.K_UP] and x>-10 and x<150 and y>150 and y<725:
+        elif keys[py.K_UP] and x>-10 and x<150 and y>380 and y<800:
+            y-=vel
+
+        elif keys[py.K_UP] and x>-10 and x<185 and y>=160 and y<250:
             y-=vel
         
         
@@ -348,7 +375,7 @@ while check:
         
         
 
-        redrawGameWindow() 
+        redrawGameWindowlvl1() 
 
             
         # if x in finishcollidex
