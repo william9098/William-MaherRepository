@@ -13,7 +13,7 @@ star_collide1x=(range(20,65))
 star_collide1y=(range(200,245))
 star_collide2x=(range(430,479))
 star_collide2y=(range(620,670))
-star_collide3x=(range(726,771))
+star_collide3x=(range(726,771)) 
 star_collide3y=(range(200,249))
 score=0
 
@@ -115,7 +115,9 @@ def redrawGameWindow():
     window.blit(stonewall,(280, 490))
     window.blit(stonewall,(50,490))
     window.blit(stonewall,(636,465))
-    window.blit(stonewall,(236,147))
+    window.blit(stonewall,(236,100))
+    # window.blit(stonewall,(245,147))
+    # window.blit(stonewall,(245,90))
     
 
     window.blit(stonewallup,(195,100))
@@ -128,6 +130,7 @@ def redrawGameWindow():
     window.blit(stonewallup,(605,530))
     # window.blit(stonewallup,(246, 335))
     window.blit(stonewallup,(246, 685))
+    
 
     
     window.blit(star,(20,200))
@@ -202,11 +205,25 @@ while check:
 
     
 
-        elif keys[py.K_DOWN] and y<800 - vel - width:
+        # elif keys[py.K_DOWN] and y<800 - vel - width:
+        #     y+=vel
+
+        elif keys[py.K_DOWN] and x>400 and x<525 and y>=0 and y<250:
             y+=vel
 
-        elif keys[py.K_UP] and y>vel:
+        elif keys[py.K_DOWN] and x>400 and x<525 and y>=0 and y<250:
+            y+=vel
+
+        
+
+        elif keys[py.K_UP] and x>=400 and x<525 and y>=0 and y<250:
             y-=vel
+
+        # elif keys[py.K_DOWN] and x<=0 and x<380:
+        #     y+=vel
+
+        # elif keys[py.K_UP] and y>vel:
+        #     y-=vel
         else: 
             left = False
             right = False
