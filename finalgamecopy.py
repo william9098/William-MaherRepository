@@ -87,7 +87,7 @@ MenuMessages=["Instructions", "Level 1", "Level 2", "Settings", "Scoreboard", "E
 settingsmessages=["Background Color","Screen Size"]
 bkgcolors=["Black", "Blue", "Green"]
 scrnsizemessages=["1000x1000", "900x900", "800 x 800"]
-InstructionsMessages=["Collect all the Stars", "Finish the maze", "Spam the arrow keys to move", "There is no jumping", "You will have to hit the stars with your head", "Due to the way the characters x is measured"]
+InstructionsMessages=["Collect all the Stars", "Finish the maze", "Spam the arrow keys to move", "There is no jumping", "You will have to hit the stars with your head", "Due to the way the characters x is measured", "You can move up and down with arrows"]
 
 
 x = 5
@@ -547,7 +547,7 @@ while run:
                                 right=True
 
 
-                            elif keys[py.K_RIGHT] and x>355 and x<725 and y>600 and y<715:
+                            elif keys[py.K_RIGHT] and x>=55 and x<725 and y>=580 and y<715:
                                 x += vel
                                 left=False
                                 right=True
@@ -607,7 +607,7 @@ while run:
                                 left=True
                                 right=False
 
-                            elif keys[py.K_LEFT] and x>140 and x<725 and y>=400 and y<=460:
+                            elif keys[py.K_LEFT] and x>155 and x<=725 and y>=400 and y<=460:
                                 x -= vel
                                 left=True
                                 right=False
@@ -616,10 +616,10 @@ while run:
                             elif keys[py.K_DOWN] and x>270 and x<540 and y>=-10 and y<=250:
                                 y+=vel
                             
-                            elif keys[py.K_DOWN] and x>380 and x<430 and y>=0 and y<460: #need to change this y i think its wrong, character stops in mid bush
+                            elif keys[py.K_DOWN] and x>380 and x<=435 and y>=0 and y<460: #need to change this y i think its wrong, character stops in mid bush
                                 y+=vel
 
-                            elif keys[py.K_DOWN] and x>=0 and x<800 and y>370 and y<460:
+                            elif keys[py.K_DOWN] and x>=0 and x<800 and y>=370 and y<460:
                                 y+=vel
 
                             elif keys[py.K_DOWN] and x>670 and x<800 and y>-20 and y<260:
@@ -628,13 +628,13 @@ while run:
                             elif keys[py.K_DOWN] and x>630 and x<800 and y>-20 and y<725:
                                 y+=vel
                             
-                            elif keys[py.K_DOWN] and x>140 and x<265 and y>=370 and y<725:
+                            elif keys[py.K_DOWN] and x>140 and x<265 and y>=380 and y<725:
                                 y+=vel
                             
                             elif keys[py.K_DOWN] and x>=0 and x<175 and y>600 and y<725:
                                 y+=vel
 
-                            elif keys[py.K_DOWN] and x>-10 and x<150 and y>=350 and y<725:
+                            elif keys[py.K_DOWN] and x>-10 and x<150 and y>=380 and y<725:
                                 y+=vel
 
 
@@ -671,7 +671,6 @@ while run:
 
                             elif keys[py.K_UP] and x>-10 and x<185 and y>=160 and y<250:
                                 y-=vel
-                            
                             
                             
 
@@ -722,7 +721,7 @@ while run:
                             display_Menu(MenuMessages)
                             py.display.flip()
                             check=False
-                            currentDisplay=DISPLAY_MAIN_MENU         
+                            currentDisplay=DISPLAY_MAIN_MENU     
     
 
 
