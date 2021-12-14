@@ -395,6 +395,7 @@ while check2:
 
         if x in Lvl2star_collide2x and y in Lvl2star_collide2y and Level2load_Star2:
             score2+=1
+            open
             Level2load_Star2=False
 
         if x in Lvl2star_collide3x and y in Lvl2star_collide3y and Level2load_Star3:
